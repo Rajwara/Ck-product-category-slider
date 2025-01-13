@@ -1,403 +1,323 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-    <meta charset="utf-8">
-    <title>Draggable Image Slider</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <style>
-        .ProductSliderMainWrapper {
-            display: flex;
-            padding: 0px;
-            min-height: 70vh;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-        
-        .ProductSliderWrapper {
-            display: flex;
-            max-width: 1200px;
-            position: relative;
-        }
-        
-        .ProductSliderWrapper i {
-            bottom: -25%;
-            height: 44px;
-            /* Adjust based on your image size */
-            width: 44px;
-            /* Adjust based on your image size */
-            color: #343F4F;
-            cursor: pointer;
-            font-size: 1.15rem;
-            position: absolute;
-            text-align: center;
-            line-height: 44px;
-            background: #fff;
-            border-radius: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.1s linear;
-        }
-        
-        .ProductSliderWrapper i img {
-            border-radius: 40px;
-            height: 100%;
-            /* Adjust to fit the container */
-            width: 100%;
-            /* Adjust to fit the container */
-            object-fit: contain;
-            /* Ensures the image maintains aspect ratio */
-        }
-        
-        .ProductSliderWrapper i:active {
-            transform: translateY(-50%) scale(0.9);
-        }
-        
-        .ProductSliderWrapper i:hover {
-            background: #f2f2f2;
-        }
-        
-        .ProductSliderWrapper i:first-child {
-            left: 80%;
-            display: none;
-        }
-        
-        i#right {
-            background: transparent;
-        }
-        
-        .ProductSliderWrapper i:last-child {
-            right: 7%;
-        }
-        
-        .ProductSliderWrapper .carousel {
-            font-size: 0px;
-            cursor: pointer;
-            overflow: hidden;
-            white-space: nowrap;
-            scroll-behavior: smooth;
-        }
-        
-        .carousel.dragging {
-            cursor: grab;
-            scroll-behavior: auto;
-        }
-        
-        .carousel.dragging img {
-            pointer-events: none;
-        }
-        
-        .carousel img.active {
-            width: 650px;
-            height: 420px;
-            border: 2px solid #FF9C9E;
-            border-radius: 40px;
-        }
-        
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<style>
+    /* Import Google font - Poppins */
+    
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    
+    .ProductSliderMainWrapper {
+        display: flex;
+        padding: 0 35px;
+        min-height: 70vh;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .ProductSliderWrapper {
+        display: flex;
+        max-width: 1200px;
+        position: relative;
+    }
+    
+    .ProductSliderWrapper i {
+        bottom: -25%;
+        height: 44px;
+        width: 44px;
+        cursor: pointer;
+        font-size: 1.15rem;
+        position: absolute;
+        text-align: center;
+        line-height: 44px;
+        background: transparent;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.1s linear;
+    }
+    
+    .ProductSliderWrapper i:active {
+        transform: translateY(-50%) scale(0.9);
+    }
+    
+    .ProductSliderWrapper i:hover {
+        background: transparent;
+    }
+    
+    .ProductSliderWrapper i:first-child {
+        left: 80%;
+    }
+    
+    .ProductSliderWrapper i:last-child {
+        right: 7%;
+    }
+    
+    i#right {
+        background: transparent;
+    }
+    
+    .ProductSliderWrapper .carousel {
+        font-size: 0px;
+        cursor: pointer;
+        overflow: hidden;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+    }
+    
+    .carousel.dragging {
+        cursor: grab;
+        scroll-behavior: auto;
+    }
+    
+    .carousel.dragging img {
+        pointer-events: none;
+    }
+    
+    .carousel img {
+        height: 340px;
+        object-fit: cover;
+        user-select: none;
+        margin-left: 14px;
+        border-radius: 40px;
+        width: calc(100% / 3);
+    }
+    
+    .carousel img:first-child {
+        margin-left: 0px;
+    }
+    
+    @media screen and (max-width: 900px) {
         .carousel img {
-            width: 420px;
-            height: 420px;
-            object-fit: cover;
-            user-select: none;
-            margin-left: 30px;
-            transition: width 0.3s, height 0.3s;
-            border-radius: 40px;
+            width: calc(100% / 2);
         }
-        
-        .carousel img:first-child {
-            height: 420px;
-            margin-left: 0px;
+    }
+    
+    @media screen and (max-width: 550px) {
+        .carousel img {
+            width: 100%;
         }
-        
-        .carousel img:hover {
-            width: 550px;
-            height: 420px;
+    }
+    
+    .carousel img.active {
+        width: 520px;
+        border-radius: 40px;
+        border: 2px solid #FF9C9E;
+    }
+    
+    .carousel img:hover {
+        width: 520px;
+        border-radius: 40px;
+        border: 2px solid #FF9C9E;
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        position: absolute;
+        bottom: -15%;
+        left: 5%;
+        align-items: center;
+    }
+    
+    .pagination .dot {
+        width: 2px;
+        /* Default size for the rest of the dots */
+        height: 2px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background-color: #FB497D;
+        cursor: pointer;
+        transition: background 0.3s;
+        opacity: 0.5;
+    }
+    
+    .dot:nth-child(1) {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .dot:nth-child(2) {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .dot:nth-child(3) {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .dot:nth-child(4) {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .dot:nth-child(5) {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .pagination .dot.active {
+        background-color: #FB497D;
+        opacity: 1;
+    }
+    
+    .dots-pagination .dot:hover {
+        background-color: #FB497D;
+        opacity: 1;
+    }
+    
+    .ProductSliderMainWrapper {
+        display: flex;
+        padding: 0px;
+        min-height: 70vh;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+    }
+    
+    @media screen and (max-width: 450px) and (min-width: 370px) {
+        .ProductSliderWrapper i:first-child {
+            left: 65%;
         }
-        
-        .dots-pagination {
-            position: absolute;
-            bottom: -15%;
-            /* Adjust position */
-            left: 10%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
+    }
+    
+    @media screen and (max-width: 369px) and (min-width: 320px) {
+        .ProductSliderWrapper i:first-child {
+            left: 65%;
         }
-        
-        .dots-pagination .dot {
-            border-radius: 50%;
-            background-color: #FB497D;
-            opacity: 0.5;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .dots-pagination .dot.active {
-            background-color: #FB497D;
-            opacity: 1;
-            /* Active dot color */
-        }
-        
-        .dots-pagination .dot:hover {
-            background-color: #FB497D;
-            opacity: 1;
-        }
-        
-        @media screen and (max-width: 900px) {
-            .carousel img {
-                width: calc(100% / 2);
-            }
-        }
-        
-        @media screen and (max-width: 550px) {
-            .carousel img {
-                width: 100%;
-            }
-        }
-        
-        @media only screen and (min-width: 375px) and (max-width: 767px) {
-            .ProductSliderWrapper i:first-child {
-                left: 65%;
-                display: none;
-            }
-            .ProductSliderWrapper i {
-                bottom: -20%;
-            }
-            .dots-pagination {
-                bottom: -13%;
-                left: 15%;
-            }
-        }
-        
-        @media only screen and (min-width: 320px) and (max-width: 374px) {
-            .ProductSliderWrapper i:first-child {
-                left: 60%;
-                display: none;
-            }
-            .ProductSliderWrapper i {
-                bottom: -20%;
-            }
-            .dots-pagination {
-                bottom: -10%;
-                left: 20%;
-            }
-        }
-    </style>
-</head>
+    }
+</style>
+<div class="ProductSliderMainWrapper">
+    <div class="ProductSliderWrapper">
+        <i id="left" class=""> <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" /></i>
+        <div class="carousel">
 
-<body>
-    <div class="ProductSliderMainWrapper">
-        <div class="ProductSliderWrapper">
-            <i id="left">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" />
-            </i>
-            <div class="carousel">
-                <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false" data-url="https://google.com">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false" data-url="https://example.com/image2">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false" data-url="https://example.com/image3">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false" data-url="https://example.com/image4">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false" data-url="https://example.com/image5">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false" data-url="https://example.com/image6">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false" data-url="https://example.com/image7">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false" data-url="https://example.com/image8">
-            </div>
-            <div class="dots-pagination"></div>
-            <i id="right">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" />
-            </i>
-
-
+            <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false">
         </div>
+        <div class="pagination"></div>
+        <i id="right" class="">  <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" /></i>
+
+
+
     </div>
+</div>
+<script>
+    // Select elements
+    const carousel = document.querySelector(".carousel");
+    const images = carousel.querySelectorAll("img");
+    const arrowIcons = document.querySelectorAll(".ProductSliderWrapper i");
+    const pagination = document.querySelector(".pagination");
 
-    <script>
-        // Select elements
-        const carousel = document.querySelector(".carousel");
-        const firstImage = carousel.querySelector("img");
-        const arrowIcons = document.querySelectorAll(".ProductSliderWrapper i");
+    // Variables
+    let currentIndex = 0;
 
-        // Variables for state management
-        let isDragging = false;
-        let startX = 0;
-        let scrollStart = 0;
-        let scrollDiff = 0;
-
-        // Helper function to toggle arrow visibility
-        const toggleArrowIcons = () => {
-            setTimeout(() => {
-                const maxScroll = Math.round(carousel.scrollWidth - carousel.clientWidth);
-                arrowIcons[0].style.display = carousel.scrollLeft <= 0 ? "none" : "block";
-                arrowIcons[1].style.display = Math.round(carousel.scrollLeft) >= maxScroll ? "none" : "block";
-            }, 100);
-        };
-
-        // Helper function to smoothly scroll the carousel
-        const scrollCarousel = (direction) => {
-            const cardWidth = firstImage.clientWidth + 14; // Image width + margin
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-            const scrollAmount = direction === "right" ? cardWidth : -cardWidth;
-
-            carousel.scrollLeft = Math.min(Math.max(carousel.scrollLeft + scrollAmount, 0), maxScroll);
-
-            toggleArrowIcons();
-        };
-
-        // Event listeners for arrows
-        arrowIcons.forEach((icon) => {
-            icon.addEventListener("click", () => {
-                const direction = icon.id === "right" ? "right" : "left";
-                scrollCarousel(direction);
-            });
-        });
-
-        // Automatic adjustment after dragging
-        const autoCenterImage = () => {
-            const cardWidth = firstImage.clientWidth + 14;
-            const offset = carousel.scrollLeft % cardWidth;
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-            if (carousel.scrollLeft > 0 && carousel.scrollLeft < maxScroll) {
-                if (offset > cardWidth / 3) {
-                    carousel.scrollLeft += cardWidth - offset; // Snap to the next image
-                } else {
-                    carousel.scrollLeft -= offset; // Snap to the previous image
-                }
-            }
-
-            toggleArrowIcons();
-        };
-
-        // Dragging logic
-        const startDragging = (event) => {
-            isDragging = true;
-            startX = event.pageX || event.touches[0].pageX;
-            scrollStart = carousel.scrollLeft;
-            carousel.classList.add("dragging");
-        };
-
-        const duringDrag = (event) => {
-            if (!isDragging) return;
-
-            const currentX = event.pageX || event.touches[0].pageX;
-            scrollDiff = currentX - startX;
-
-            carousel.scrollLeft = scrollStart - scrollDiff;
-        };
-
-        const stopDragging = () => {
-            if (!isDragging) return;
-
-            isDragging = false;
-            carousel.classList.remove("dragging");
-
-            if (Math.abs(scrollDiff) > 10) {
-                autoCenterImage();
-            }
-        };
-
-        // Attach event listeners
-        carousel.addEventListener("mousedown", startDragging);
-        carousel.addEventListener("touchstart", startDragging);
-
-        document.addEventListener("mousemove", duringDrag);
-        carousel.addEventListener("touchmove", duringDrag);
-
-        document.addEventListener("mouseup", stopDragging);
-        carousel.addEventListener("touchend", stopDragging);
-        // Image click event to redirect to the URL
-        const images = document.querySelectorAll('.carousel img');
-        images.forEach(img => {
-            img.addEventListener('click', function() {
-                const url = this.getAttribute('data-url');
-                if (url) {
-                    window.open(url, '_blank'); // Opens the URL in a new tab
-                }
-            });
-        });
-
-
-        // Initial setup
-        toggleArrowIcons();
-
-
-        // Pagination setup
-        const dotsContainer = document.querySelector(".dots-pagination");
-        const imagesArray = [...images]; // Convert NodeList to Array for easy iteration
-
-        // Define sizes for dots
-        const dotSizes = [12, 10, 8, 6, 4]; // Example sizes, add more as needed
-
-        // Create dots dynamically
-        imagesArray.forEach((img, index) => {
+    // Create pagination dots
+    const createPaginationDots = () => {
+        images.forEach((_, index) => {
             const dot = document.createElement("div");
-            dot.className = "dot";
-            if (index === 0) dot.classList.add("active"); // Mark the first dot as active
+            dot.classList.add("dot");
+            if (index === 0) dot.classList.add("active"); // Set the first dot as active
+            dot.addEventListener("click", () => navigateToImage(index));
+            pagination.appendChild(dot);
+        });
+    };
 
-            // Apply size based on index
-            const size = dotSizes[index] || 4; // Default to 8px if size is not defined
-            dot.style.width = `${size}px`;
-            dot.style.height = `${size}px`;
+    // Update active class on dots
+    const updatePaginationDots = () => {
+        const dots = document.querySelectorAll(".pagination .dot");
+        dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentIndex);
+        });
+    };
 
-            dotsContainer.appendChild(dot);
+    // Navigate to a specific image
+    const navigateToImage = (index) => {
+        const cardWidth = images[0].clientWidth + 14; // Image width + margin
+        currentIndex = index;
+        const scrollPosition = cardWidth * currentIndex;
 
-            // Add click event to scroll to the respective image
-            dot.addEventListener("click", () => {
-                const cardWidth = firstImage.clientWidth + 14;
-                carousel.scrollLeft = cardWidth * index;
-                updateActiveDot(index);
-            });
+        carousel.scrollTo({
+            left: scrollPosition,
+            behavior: "smooth",
         });
 
-        // Update active dot based on the current scroll position
-        const updateActiveDot = (activeIndex) => {
-            const dots = dotsContainer.querySelectorAll(".dot");
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === activeIndex);
-            });
-        };
+        updateActiveClass();
+        updatePaginationDots();
+    };
 
-        // Monitor scroll position to update dots
-        carousel.addEventListener("scroll", () => {
-            const cardWidth = firstImage.clientWidth + 14;
-            const activeIndex = Math.round(carousel.scrollLeft / cardWidth);
-            updateActiveDot(activeIndex);
+    // Update active class on images
+    const updateActiveClass = () => {
+        images.forEach((img, index) => {
+            img.classList.toggle("active", index === currentIndex);
         });
+    };
+
+    // Scroll carousel with arrows
+    const scrollCarousel = (direction) => {
+        const maxIndex = images.length - 1;
+
+        if (direction === "right" && currentIndex < maxIndex) {
+            currentIndex++;
+        } else if (direction === "left" && currentIndex > 0) {
+            currentIndex--;
+        }
+
+        navigateToImage(currentIndex);
+    };
+
+    // Arrow click listeners
+    arrowIcons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+            const direction = icon.id === "right" ? "right" : "left";
+            scrollCarousel(direction);
+        });
+    });
+
+    // Initial setup
+    createPaginationDots();
+    updatePaginationDots();
 
 
 
-        // Helper function to update the active image dimensions
-        const updateActiveImage = (activeIndex) => {
-            const allImages = document.querySelectorAll(".carousel img");
 
-            allImages.forEach((img, index) => {
-                if (index === activeIndex) {
-                    img.classList.add("active");
+    /*for classes activate*/
+    document.addEventListener("DOMContentLoaded", function() {
+        const carouselImages = document.querySelectorAll(".carousel img");
+
+        if (carouselImages.length > 1) {
+            const firstChild = carouselImages[0];
+            const secondChild = carouselImages[1];
+
+            // Monitor class changes on the second child
+            const observer = new MutationObserver(() => {
+                if (secondChild.classList.contains("active")) {
+                    // If the second child has "active", ensure the first child keeps "active"
+                    firstChild.classList.add("active");
+                } else if (thirdChild.classList.contains("active")) {
+                    // If the second child has "active", ensure the first child keeps "active"
+                    secondChild.classList.add("active");
                 } else {
-                    img.classList.remove("active");
+                    // Otherwise, remove "active" from the first child
+                    firstChild.classList.remove("active");
                 }
             });
-        };
 
-        // Update the active image when the user clicks a dot
-        dotsContainer.addEventListener("click", (e) => {
-            const clickedDot = [...dotsContainer.children].indexOf(e.target);
-            if (clickedDot >= 0) updateActiveImage(clickedDot);
-        });
-
-        // Adjust the active image when scrolling
-        carousel.addEventListener("scroll", () => {
-            const cardWidth = firstImage.clientWidth + 14;
-            const activeIndex = Math.round(carousel.scrollLeft / cardWidth);
-            updateActiveImage(activeIndex);
-        });
-
-        // Initial setup
-        updateActiveImage(0); // Make the first image active
-    </script>
-</body>
-
-</html>
+            // Observe class changes on the second child
+            observer.observe(secondChild, {
+                attributes: true,
+                attributeFilter: ["class"]
+            });
+        }
+    });
+</script>
