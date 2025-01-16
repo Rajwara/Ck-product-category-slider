@@ -1,323 +1,315 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-<style>
-    /* Import Google font - Poppins */
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+  
     
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Poppins', sans-serif;
-    }
-    
-    .ProductSliderMainWrapper {
-        display: flex;
-        padding: 0 35px;
-        min-height: 70vh;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .ProductSliderWrapper {
-        display: flex;
-        max-width: 1200px;
-        position: relative;
-    }
-    
-    .ProductSliderWrapper i {
-        bottom: -25%;
-        height: 44px;
-        width: 44px;
-        cursor: pointer;
-        font-size: 1.15rem;
-        position: absolute;
-        text-align: center;
-        line-height: 44px;
-        background: transparent;
-        border-radius: 50%;
-        transform: translateY(-50%);
-        transition: transform 0.1s linear;
-    }
-    
-    .ProductSliderWrapper i:active {
-        transform: translateY(-50%) scale(0.9);
-    }
-    
-    .ProductSliderWrapper i:hover {
-        background: transparent;
-    }
-    
-    .ProductSliderWrapper i:first-child {
-        left: 80%;
-    }
-    
-    .ProductSliderWrapper i:last-child {
-        right: 7%;
-    }
-    
-    i#right {
-        background: transparent;
-    }
-    
-    .ProductSliderWrapper .carousel {
-        font-size: 0px;
-        cursor: pointer;
-        overflow: hidden;
-        white-space: nowrap;
-        scroll-behavior: smooth;
-    }
-    
-    .carousel.dragging {
-        cursor: grab;
-        scroll-behavior: auto;
-    }
-    
-    .carousel.dragging img {
-        pointer-events: none;
-    }
-    
-    .carousel img {
-        height: 340px;
-        object-fit: cover;
-        user-select: none;
-        margin-left: 14px;
-        border-radius: 40px;
-        width: calc(100% / 3);
-    }
-    
-    .carousel img:first-child {
-        margin-left: 0px;
-    }
-    
-    @media screen and (max-width: 900px) {
-        .carousel img {
-            width: calc(100% / 2);
+        
+        .ProductSliderMainWrapper {
+            display: flex;
+            padding: 0 35px;
+            min-height: 45vh;
+            align-items: center;
+            justify-content: center;
         }
-    }
-    
-    @media screen and (max-width: 550px) {
-        .carousel img {
-            width: 100%;
+        
+        .ProductSliderWrapper {
+            display: flex;
+            max-width: 1200px;
+            position: relative;
         }
-    }
-    
-    .carousel img.active {
-        width: 520px;
-        border-radius: 40px;
-        border: 2px solid #FF9C9E;
-    }
-    
-    .carousel img:hover {
-        width: 520px;
-        border-radius: 40px;
-        border: 2px solid #FF9C9E;
-    }
-    
-    .pagination {
-        display: flex;
-        justify-content: center;
-        margin-top: 10px;
-        position: absolute;
-        bottom: -15%;
-        left: 5%;
-        align-items: center;
-    }
-    
-    .pagination .dot {
-        width: 2px;
-        /* Default size for the rest of the dots */
-        height: 2px;
-        margin: 0 5px;
-        border-radius: 50%;
-        background-color: #FB497D;
-        cursor: pointer;
-        transition: background 0.3s;
-        opacity: 0.5;
-    }
-    
-    .dot:nth-child(1) {
-        width: 12px;
-        height: 12px;
-    }
-    
-    .dot:nth-child(2) {
-        width: 10px;
-        height: 10px;
-    }
-    
-    .dot:nth-child(3) {
-        width: 8px;
-        height: 8px;
-    }
-    
-    .dot:nth-child(4) {
-        width: 6px;
-        height: 6px;
-    }
-    
-    .dot:nth-child(5) {
-        width: 4px;
-        height: 4px;
-    }
-    
-    .pagination .dot.active {
-        background-color: #FB497D;
-        opacity: 1;
-    }
-    
-    .dots-pagination .dot:hover {
-        background-color: #FB497D;
-        opacity: 1;
-    }
-    
-    .ProductSliderMainWrapper {
-        display: flex;
-        padding: 0px;
-        min-height: 70vh;
-        align-items: center;
-        justify-content: center;
-        background: transparent;
-    }
-    
-    @media screen and (max-width: 450px) and (min-width: 370px) {
+        
+        .ProductSliderWrapper i {
+            bottom: -25%;
+            height: 44px;
+            width: 44px;
+            cursor: pointer;
+            font-size: 1.15rem;
+            position: absolute;
+            text-align: center;
+            line-height: 44px;
+            background: transparent;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.1s linear;
+        }
+        
+        .ProductSliderWrapper i:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+        
+        .ProductSliderWrapper i:hover {
+            background: transparent;
+        }
+        
         .ProductSliderWrapper i:first-child {
-            left: 65%;
+            left: 80%;
         }
-    }
-    
-    @media screen and (max-width: 369px) and (min-width: 320px) {
-        .ProductSliderWrapper i:first-child {
-            left: 65%;
+        
+        .ProductSliderWrapper i:last-child {
+            right: 7%;
         }
-    }
-</style>
-<div class="ProductSliderMainWrapper">
-    <div class="ProductSliderWrapper">
-        <i id="left" class=""> <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" /></i>
-        <div class="carousel">
+        
+        i#right {
+            background: transparent;
+        }
+        
+        .ProductSliderWrapper .carousel {
+            font-size: 0px;
+            cursor: pointer;
+            overflow: hidden;
+            white-space: nowrap;
+            scroll-behavior: smooth;
+        }
+        
+        .carousel.dragging {
+            cursor: grab;
+            scroll-behavior: auto;
+        }
+        
+        .carousel.dragging img {
+            pointer-events: none;
+        }
+        
+        .carousel img {
+            height: 340px;
+            object-fit: cover;
+            user-select: none;
+            margin-left: 14px;
+            border-radius: 40px;
+            width: calc(100% / 3);
+        }
+        
+        .carousel img:first-child {
+            margin-left: 0px;
+        }
+        
+        @media screen and (max-width: 900px) {
+            .carousel img {
+                width: calc(100% / 2);
+            }
+        }
+        
+        @media screen and (max-width: 550px) {
+            .carousel img {
+                width: 100%;
+            }
+        }
+        
+        .carousel img.active {
+            width: 520px;
+            border-radius: 40px;
+            border: 2px solid #FF9C9E;
+        }
+        
+        .carousel img:hover {
+            width: 520px;
+            border-radius: 40px;
+            border: 2px solid #FF9C9E;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+            position: absolute;
+            bottom: -15%;
+            left: 5%;
+            align-items: center;
+        }
+        
+        .pagination .dot {
+            width: 2px;
+            /* Default size for the rest of the dots */
+            height: 2px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: #FB497D;
+            cursor: pointer;
+            transition: background 0.3s;
+            opacity: 0.5;
+        }
+        
+        .dot:nth-child(1) {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .dot:nth-child(2) {
+            width: 10px;
+            height: 10px;
+        }
+        
+        .dot:nth-child(3) {
+            width: 8px;
+            height: 8px;
+        }
+        
+        .dot:nth-child(4) {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .dot:nth-child(5) {
+            width: 4px;
+            height: 4px;
+        }
+        
+        .pagination .dot.active {
+            background-color: #FB497D;
+            opacity: 1;
+        }
+        
+        .dots-pagination .dot:hover {
+            background-color: #FB497D;
+            opacity: 1;
+        }
+        
+        .ProductSliderMainWrapper {
+            display: flex;
+            padding: 0px;
+            min-height: 50vh;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+        }
+            @media screen and (max-width: 450px) and (min-width: 370px) {
+            .ProductSliderWrapper i:first-child {
+                left: 65%;
+            }
+        }
+        
+        @media screen and (max-width: 369px) and (min-width: 320px) {
+            .ProductSliderWrapper i:first-child {
+                left: 65%;
+            }
+        }
+    </style>
+     <div class="ProductSliderMainWrapper">
+        <div class="ProductSliderWrapper">
+            <i id="left" class=""> <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" /></i>
+            <div class="carousel">
 
-            <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false">
+                <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false">
+                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false">
+            </div>
+            <div class="pagination"></div>
+            <i id="right" class="">  <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" /></i>
+
+
+
         </div>
-        <div class="pagination"></div>
-        <i id="right" class="">  <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" /></i>
-
-
-
     </div>
-</div>
-<script>
-    // Select elements
-    const carousel = document.querySelector(".carousel");
-    const images = carousel.querySelectorAll("img");
-    const arrowIcons = document.querySelectorAll(".ProductSliderWrapper i");
-    const pagination = document.querySelector(".pagination");
+    <script>
+        // Select elements
+        const carousel = document.querySelector(".carousel");
+        const images = carousel.querySelectorAll("img");
+        const arrowIcons = document.querySelectorAll(".ProductSliderWrapper i");
+        const pagination = document.querySelector(".pagination");
 
-    // Variables
-    let currentIndex = 0;
+        // Variables
+        let currentIndex = 0;
 
-    // Create pagination dots
-    const createPaginationDots = () => {
-        images.forEach((_, index) => {
-            const dot = document.createElement("div");
-            dot.classList.add("dot");
-            if (index === 0) dot.classList.add("active"); // Set the first dot as active
-            dot.addEventListener("click", () => navigateToImage(index));
-            pagination.appendChild(dot);
+        // Create pagination dots
+        const createPaginationDots = () => {
+            images.forEach((_, index) => {
+                const dot = document.createElement("div");
+                dot.classList.add("dot");
+                if (index === 0) dot.classList.add("active"); // Set the first dot as active
+                dot.addEventListener("click", () => navigateToImage(index));
+                pagination.appendChild(dot);
+            });
+        };
+
+        // Update active class on dots
+        const updatePaginationDots = () => {
+            const dots = document.querySelectorAll(".pagination .dot");
+            dots.forEach((dot, index) => {
+                dot.classList.toggle("active", index === currentIndex);
+            });
+        };
+
+        // Navigate to a specific image
+        const navigateToImage = (index) => {
+            const cardWidth = images[0].clientWidth + 14; // Image width + margin
+            currentIndex = index;
+            const scrollPosition = cardWidth * currentIndex;
+
+            carousel.scrollTo({
+                left: scrollPosition,
+                behavior: "smooth",
+            });
+
+            updateActiveClass();
+            updatePaginationDots();
+        };
+
+        // Update active class on images
+        const updateActiveClass = () => {
+            images.forEach((img, index) => {
+                img.classList.toggle("active", index === currentIndex);
+            });
+        };
+
+        // Scroll carousel with arrows
+        const scrollCarousel = (direction) => {
+            const maxIndex = images.length - 1;
+
+            if (direction === "right" && currentIndex < maxIndex) {
+                currentIndex++;
+            } else if (direction === "left" && currentIndex > 0) {
+                currentIndex--;
+            }
+
+            navigateToImage(currentIndex);
+        };
+
+        // Arrow click listeners
+        arrowIcons.forEach((icon) => {
+            icon.addEventListener("click", () => {
+                const direction = icon.id === "right" ? "right" : "left";
+                scrollCarousel(direction);
+            });
         });
-    };
 
-    // Update active class on dots
-    const updatePaginationDots = () => {
-        const dots = document.querySelectorAll(".pagination .dot");
-        dots.forEach((dot, index) => {
-            dot.classList.toggle("active", index === currentIndex);
-        });
-    };
-
-    // Navigate to a specific image
-    const navigateToImage = (index) => {
-        const cardWidth = images[0].clientWidth + 14; // Image width + margin
-        currentIndex = index;
-        const scrollPosition = cardWidth * currentIndex;
-
-        carousel.scrollTo({
-            left: scrollPosition,
-            behavior: "smooth",
-        });
-
-        updateActiveClass();
+        // Initial setup
+        createPaginationDots();
         updatePaginationDots();
-    };
+        
+        
+        
+        
+        /*for classes activate*/
+        document.addEventListener("DOMContentLoaded", function() {
+            const carouselImages = document.querySelectorAll(".carousel img");
 
-    // Update active class on images
-    const updateActiveClass = () => {
-        images.forEach((img, index) => {
-            img.classList.toggle("active", index === currentIndex);
+            if (carouselImages.length > 1) {
+                const firstChild = carouselImages[0];
+                const secondChild = carouselImages[1];
+
+                // Monitor class changes on the second child
+                const observer = new MutationObserver(() => {
+                    if (secondChild.classList.contains("active")) {
+                        // If the second child has "active", ensure the first child keeps "active"
+                        firstChild.classList.add("active");
+                    } else if (thirdChild.classList.contains("active")) {
+                        // If the second child has "active", ensure the first child keeps "active"
+                        secondChild.classList.add("active");
+                    } else {
+                        // Otherwise, remove "active" from the first child
+                        firstChild.classList.remove("active");
+                    }
+                });
+
+                // Observe class changes on the second child
+                observer.observe(secondChild, {
+                    attributes: true,
+                    attributeFilter: ["class"]
+                });
+            }
         });
-    };
-
-    // Scroll carousel with arrows
-    const scrollCarousel = (direction) => {
-        const maxIndex = images.length - 1;
-
-        if (direction === "right" && currentIndex < maxIndex) {
-            currentIndex++;
-        } else if (direction === "left" && currentIndex > 0) {
-            currentIndex--;
-        }
-
-        navigateToImage(currentIndex);
-    };
-
-    // Arrow click listeners
-    arrowIcons.forEach((icon) => {
-        icon.addEventListener("click", () => {
-            const direction = icon.id === "right" ? "right" : "left";
-            scrollCarousel(direction);
-        });
-    });
-
-    // Initial setup
-    createPaginationDots();
-    updatePaginationDots();
-
-
-
-
-    /*for classes activate*/
-    document.addEventListener("DOMContentLoaded", function() {
-        const carouselImages = document.querySelectorAll(".carousel img");
-
-        if (carouselImages.length > 1) {
-            const firstChild = carouselImages[0];
-            const secondChild = carouselImages[1];
-
-            // Monitor class changes on the second child
-            const observer = new MutationObserver(() => {
-                if (secondChild.classList.contains("active")) {
-                    // If the second child has "active", ensure the first child keeps "active"
-                    firstChild.classList.add("active");
-                } else if (thirdChild.classList.contains("active")) {
-                    // If the second child has "active", ensure the first child keeps "active"
-                    secondChild.classList.add("active");
-                } else {
-                    // Otherwise, remove "active" from the first child
-                    firstChild.classList.remove("active");
-                }
-            });
-
-            // Observe class changes on the second child
-            observer.observe(secondChild, {
-                attributes: true,
-                attributeFilter: ["class"]
-            });
-        }
-    });
-</script>
+    </script>
