@@ -1,8 +1,5 @@
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <style>
-  
-    
-        
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <style>
         .ProductSliderMainWrapper {
             display: flex;
             padding: 0 35px;
@@ -29,7 +26,7 @@
             background: transparent;
             border-radius: 50%;
             transform: translateY(-50%);
-            transition: transform 0.1s linear;
+            transition: transform 0.4s linear;
         }
         
         .ProductSliderWrapper i:active {
@@ -76,6 +73,7 @@
             margin-left: 14px;
             border-radius: 40px;
             width: calc(100% / 3);
+            flex-shrink: 0;
         }
         
         .carousel img:first-child {
@@ -99,11 +97,18 @@
             border-radius: 40px;
             border: 2px solid #FF9C9E;
         }
-        
+        /*
         .carousel img:hover {
             width: 520px;
             border-radius: 40px;
             border: 2px solid #FF9C9E;
+        }
+        */
+        
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            /* Smooth transition effect */
         }
         
         .pagination {
@@ -171,7 +176,8 @@
             justify-content: center;
             background: transparent;
         }
-            @media screen and (max-width: 450px) and (min-width: 370px) {
+        
+        @media screen and (max-width: 450px) and (min-width: 370px) {
             .ProductSliderWrapper i:first-child {
                 left: 65%;
             }
@@ -183,133 +189,133 @@
             }
         }
     </style>
-     <div class="ProductSliderMainWrapper">
-        <div class="ProductSliderWrapper">
-            <i id="left" class=""> <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" /></i>
-            <div class="carousel">
+ <div class="ProductSliderMainWrapper">
+    <div class="ProductSliderWrapper">
+        <i id="left" class=""> <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" /></i>
+        <div class="carousel">
 
-                <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false">
-                <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false">
-            </div>
-            <div class="pagination"></div>
-            <i id="right" class="">  <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" /></i>
-
-
-
+            <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false">
+            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false">
         </div>
+        <div class="pagination"></div>
+        <i id="right" class="">  <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" /></i>
+
+
+
     </div>
-    <script>
-        // Select elements
-        const carousel = document.querySelector(".carousel");
-        const images = carousel.querySelectorAll("img");
-        const arrowIcons = document.querySelectorAll(".ProductSliderWrapper i");
-        const pagination = document.querySelector(".pagination");
+</div>
+<script>
+    // Select elements
+    const carousel = document.querySelector(".carousel");
+    const images = carousel.querySelectorAll("img");
+    const arrowIcons = document.querySelectorAll(".ProductSliderWrapper i");
+    const pagination = document.querySelector(".pagination");
 
-        // Variables
-        let currentIndex = 0;
+    // Variables
+    let currentIndex = 0;
 
-        // Create pagination dots
-        const createPaginationDots = () => {
-            images.forEach((_, index) => {
-                const dot = document.createElement("div");
-                dot.classList.add("dot");
-                if (index === 0) dot.classList.add("active"); // Set the first dot as active
-                dot.addEventListener("click", () => navigateToImage(index));
-                pagination.appendChild(dot);
-            });
-        };
+    // Create pagination dots
+    const createPaginationDots = () => {
+        images.forEach((_, index) => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            if (index === 0) dot.classList.add("active"); // Set the first dot as active
+            dot.addEventListener("click", () => navigateToImage(index));
+            pagination.appendChild(dot);
+        });
+    };
 
-        // Update active class on dots
-        const updatePaginationDots = () => {
-            const dots = document.querySelectorAll(".pagination .dot");
-            dots.forEach((dot, index) => {
-                dot.classList.toggle("active", index === currentIndex);
-            });
-        };
+    // Update active class on dots
+    const updatePaginationDots = () => {
+        const dots = document.querySelectorAll(".pagination .dot");
+        dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentIndex);
+        });
+    };
 
-        // Navigate to a specific image
-        const navigateToImage = (index) => {
-            const cardWidth = images[0].clientWidth + 14; // Image width + margin
-            currentIndex = index;
-            const scrollPosition = cardWidth * currentIndex;
+    // Navigate to a specific image
+    const navigateToImage = (index) => {
+        const cardWidth = images[0].clientWidth + 14; // Image width + margin
+        currentIndex = index;
+        const scrollPosition = cardWidth * currentIndex;
 
-            carousel.scrollTo({
-                left: scrollPosition,
-                behavior: "smooth",
-            });
-
-            updateActiveClass();
-            updatePaginationDots();
-        };
-
-        // Update active class on images
-        const updateActiveClass = () => {
-            images.forEach((img, index) => {
-                img.classList.toggle("active", index === currentIndex);
-            });
-        };
-
-        // Scroll carousel with arrows
-        const scrollCarousel = (direction) => {
-            const maxIndex = images.length - 1;
-
-            if (direction === "right" && currentIndex < maxIndex) {
-                currentIndex++;
-            } else if (direction === "left" && currentIndex > 0) {
-                currentIndex--;
-            }
-
-            navigateToImage(currentIndex);
-        };
-
-        // Arrow click listeners
-        arrowIcons.forEach((icon) => {
-            icon.addEventListener("click", () => {
-                const direction = icon.id === "right" ? "right" : "left";
-                scrollCarousel(direction);
-            });
+        carousel.scrollTo({
+            left: scrollPosition,
+            behavior: "smooth",
         });
 
-        // Initial setup
-        createPaginationDots();
+        updateActiveClass();
         updatePaginationDots();
-        
-        
-        
-        
-        /*for classes activate*/
-        document.addEventListener("DOMContentLoaded", function() {
-            const carouselImages = document.querySelectorAll(".carousel img");
+    };
 
-            if (carouselImages.length > 1) {
-                const firstChild = carouselImages[0];
-                const secondChild = carouselImages[1];
-
-                // Monitor class changes on the second child
-                const observer = new MutationObserver(() => {
-                    if (secondChild.classList.contains("active")) {
-                        // If the second child has "active", ensure the first child keeps "active"
-                        firstChild.classList.add("active");
-                    } else if (thirdChild.classList.contains("active")) {
-                        // If the second child has "active", ensure the first child keeps "active"
-                        secondChild.classList.add("active");
-                    } else {
-                        // Otherwise, remove "active" from the first child
-                        firstChild.classList.remove("active");
-                    }
-                });
-
-                // Observe class changes on the second child
-                observer.observe(secondChild, {
-                    attributes: true,
-                    attributeFilter: ["class"]
-                });
-            }
+    // Update active class on images
+    const updateActiveClass = () => {
+        images.forEach((img, index) => {
+            img.classList.toggle("active", index === currentIndex);
         });
-    </script>
+    };
+
+    // Scroll carousel with arrows
+    const scrollCarousel = (direction) => {
+        const maxIndex = images.length - 1;
+
+        if (direction === "right" && currentIndex < maxIndex) {
+            currentIndex++;
+        } else if (direction === "left" && currentIndex > 0) {
+            currentIndex--;
+        }
+
+        navigateToImage(currentIndex);
+    };
+
+    // Arrow click listeners
+    arrowIcons.forEach((icon) => {
+        icon.addEventListener("click", () => {
+            const direction = icon.id === "right" ? "right" : "left";
+            scrollCarousel(direction);
+        });
+    });
+
+    // Initial setup
+    createPaginationDots();
+    updatePaginationDots();
+    
+    
+    
+    
+    /*for classes activate*/
+    document.addEventListener("DOMContentLoaded", function() {
+        const carouselImages = document.querySelectorAll(".carousel img");
+
+        if (carouselImages.length > 1) {
+            const firstChild = carouselImages[0];
+            const secondChild = carouselImages[1];
+
+            // Monitor class changes on the second child
+            const observer = new MutationObserver(() => {
+                if (secondChild.classList.contains("active")) {
+                    // If the second child has "active", ensure the first child keeps "active"
+                    firstChild.classList.add("active");
+                } else if (thirdChild.classList.contains("active")) {
+                    // If the second child has "active", ensure the first child keeps "active"
+                    secondChild.classList.add("active");
+                } else {
+                    // Otherwise, remove "active" from the first child
+                    firstChild.classList.remove("active");
+                }
+            });
+
+            // Observe class changes on the second child
+            observer.observe(secondChild, {
+                attributes: true,
+                attributeFilter: ["class"]
+            });
+        }
+    });
+</script>
