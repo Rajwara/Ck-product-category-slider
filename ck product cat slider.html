@@ -1,207 +1,404 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-  <style>
-        .ProductSliderMainWrapper {
-            display: flex;
-            padding: 0 35px;
-            min-height: 45vh;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .ProductSliderWrapper {
-            display: flex;
-            max-width: 1200px;
-            position: relative;
-        }
-        
-        .ProductSliderWrapper i {
-            bottom: -25%;
-            height: 44px;
-            width: 44px;
-            cursor: pointer;
-            font-size: 1.15rem;
-            position: absolute;
-            text-align: center;
-            line-height: 44px;
-            background: transparent;
-            border-radius: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.4s linear;
-        }
-        
-        .ProductSliderWrapper i:active {
-            transform: translateY(-50%) scale(0.9);
-        }
-        
-        .ProductSliderWrapper i:hover {
-            background: transparent;
-        }
-        
-        .ProductSliderWrapper i:first-child {
-            left: 80%;
-        }
-        
-        .ProductSliderWrapper i:last-child {
-            right: 7%;
-        }
-        
-        i#right {
-            background: transparent;
-        }
-        
-        .ProductSliderWrapper .carousel {
-            font-size: 0px;
-            cursor: pointer;
-            overflow: hidden;
-            white-space: nowrap;
-            scroll-behavior: smooth;
-        }
-        
-        .carousel.dragging {
-            cursor: grab;
-            scroll-behavior: auto;
-        }
-        
-        .carousel.dragging img {
-            pointer-events: none;
-        }
-        
+<style>
+    .ProductSliderMainWrapper {
+        display: flex;
+        padding: 0 35px;
+        min-height: 45vh;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10%;
+    }
+    
+    .ProductSliderWrapper {
+        display: flex;
+        max-width: 1200px;
+        position: relative;
+    }
+    
+    .ProductSliderWrapper i {
+        bottom: -25%;
+        height: 44px;
+        width: 44px;
+        cursor: pointer;
+        font-size: 1.15rem;
+        position: absolute;
+        text-align: center;
+        line-height: 44px;
+        background: transparent;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.4s linear;
+    }
+    
+    .ProductSliderWrapper i:active {
+        transform: translateY(-50%) scale(0.9);
+    }
+    
+    .ProductSliderWrapper i:hover {
+        background: transparent;
+    }
+    
+    .ProductSliderWrapper i:first-child {
+        left: 80%;
+    }
+    
+    .ProductSliderWrapper i:last-child {
+        right: 7%;
+    }
+    
+    i#right {
+        background: transparent;
+    }
+    
+    .ProductSliderWrapper .carousel {
+        font-size: 0px;
+        cursor: pointer;
+        overflow: hidden;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+        height: 440px;
+    }
+    
+    .carousel.dragging {
+        cursor: grab;
+        scroll-behavior: auto;
+    }
+    
+    .carousel.dragging img {
+        pointer-events: none;
+    }
+    
+    .carousel img {
+        height: 400px;
+        object-fit: cover;
+        user-select: none;
+        margin-left: 14px;
+        border-radius: 40px;
+        width: calc(100% / 3);
+        flex-shrink: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        transition: width 0.5s linear, border 0.5s linear;
+        /* Smooth transition */
+    }
+    
+    .carousel img:first-child {
+        margin-left: 0px;
+    }
+    
+    @media screen and (max-width: 900px) {
         .carousel img {
-            height: 340px;
-            object-fit: cover;
-            user-select: none;
-            margin-left: 14px;
-            border-radius: 40px;
-            width: calc(100% / 3);
-            flex-shrink: 0;
+            width: calc(100% / 2);
         }
-        
-        .carousel img:first-child {
-            margin-left: 0px;
+    }
+    
+    @media screen and (max-width: 550px) {
+        .carousel img {
+            width: 100%;
         }
-        
-        @media screen and (max-width: 900px) {
-            .carousel img {
-                width: calc(100% / 2);
-            }
-        }
-        
-        @media screen and (max-width: 550px) {
-            .carousel img {
-                width: 100%;
-            }
-        }
-        
-        .carousel img.active {
-            width: 520px;
-            border-radius: 40px;
-            border: 2px solid #FF9C9E;
-        }
-        /*
+    }
+    
+    .carousel img.active {
+        width: 600px;
+        height: 400px;
+        border-radius: 40px;
+        border: 2px solid #ff9c9e96;
+        box-shadow: 4px 3px 10px rgba(86, 86, 86, 0.5);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    /*
         .carousel img:hover {
             width: 520px;
             border-radius: 40px;
             border: 2px solid #FF9C9E;
         }
         */
-        
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            /* Smooth transition effect */
+    
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        /* Smooth transition effect */
+    }
+    
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        position: absolute;
+        bottom: -15%;
+        left: 5%;
+        align-items: center;
+    }
+    
+    .pagination .dot {
+        width: 2px;
+        /* Default size for the rest of the dots */
+        height: 2px;
+        margin: 0 5px;
+        border-radius: 50%;
+        background-color: #FB497D;
+        cursor: pointer;
+        transition: background 0.3s;
+        opacity: 0.5;
+    }
+    
+    .dot:nth-child(1) {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .dot:nth-child(2) {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .dot:nth-child(3) {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .dot:nth-child(4) {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .dot:nth-child(5) {
+        width: 4px;
+        height: 4px;
+    }
+    
+    .pagination .dot.active {
+        background-color: #FB497D;
+        opacity: 1;
+    }
+    
+    .dots-pagination .dot:hover {
+        background-color: #FB497D;
+        opacity: 1;
+    }
+    
+    .ProductSliderMainWrapper {
+        display: flex;
+        padding: 0px;
+        min-height: 50vh;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+    }
+    
+    @media screen and (max-width: 767px) and (min-width: 370px) {
+        .ProductSliderWrapper i:first-child {
+            left: 65%;
         }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-            position: absolute;
-            bottom: -15%;
-            left: 5%;
-            align-items: center;
+    }
+    
+    @media screen and (max-width: 369px) and (min-width: 320px) {
+        .ProductSliderWrapper i:first-child {
+            left: 65%;
         }
-        
-        .pagination .dot {
-            width: 2px;
-            /* Default size for the rest of the dots */
-            height: 2px;
-            margin: 0 5px;
-            border-radius: 50%;
-            background-color: #FB497D;
-            cursor: pointer;
-            transition: background 0.3s;
-            opacity: 0.5;
+    }
+    
+    .featured-content-conatiner {
+        max-width: 1200px;
+        position: relative;
+        align-items: center;
+        margin: 0px auto;
+        height: 300px;
+        display: flex;
+    }
+    
+    .photo-tiles,
+    .theme-photobook,
+    .custom-photobook,
+    .mug-book,
+    .retro-prints,
+    .photo-strips,
+    .retro-bundleup,
+    .retro-qualityprints {
+        width: 100%;
+        display: flex;
+    }
+    
+    .custom-photobook>div,
+    .theme-photobook>div,
+    .photo-tiles>div,
+    .mug-product>div,
+    .retro-prints>div,
+    .photo-strips>div,
+    .retro-bundleup>div,
+    .retro-qualityprints>div {
+        width: 50%;
+        padding: 10px;
+    }
+    
+    @media screen and (max-width: 767px) and (min-width: 320px) {
+        .custom-photobook>div,
+        .theme-photobook>div,
+        .photo-tiles>div,
+        .mug-product>div,
+        .retro-prints>div,
+        .photo-strips>div,
+        .retro-bundleup>div,
+        .retro-qualityprints>div {
+            width: 100%;
+            padding: 10px;
         }
-        
-        .dot:nth-child(1) {
-            width: 12px;
-            height: 12px;
+        .featured-content-conatiner {
+            height: 400px;
         }
-        
-        .dot:nth-child(2) {
-            width: 10px;
-            height: 10px;
-        }
-        
-        .dot:nth-child(3) {
-            width: 8px;
-            height: 8px;
-        }
-        
-        .dot:nth-child(4) {
-            width: 6px;
-            height: 6px;
-        }
-        
-        .dot:nth-child(5) {
-            width: 4px;
-            height: 4px;
-        }
-        
-        .pagination .dot.active {
-            background-color: #FB497D;
-            opacity: 1;
-        }
-        
-        .dots-pagination .dot:hover {
-            background-color: #FB497D;
-            opacity: 1;
-        }
-        
-        .ProductSliderMainWrapper {
-            display: flex;
-            padding: 0px;
-            min-height: 50vh;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-        
-        @media screen and (max-width: 450px) and (min-width: 370px) {
-            .ProductSliderWrapper i:first-child {
-                left: 65%;
-            }
-        }
-        
-        @media screen and (max-width: 369px) and (min-width: 320px) {
-            .ProductSliderWrapper i:first-child {
-                left: 65%;
-            }
-        }
-    </style>
- <div class="ProductSliderMainWrapper">
+    }
+    
+    .custom-photobook-h2,
+    .themed-photobook-h2,
+    .photo-tiles-h2,
+    .mug-h2,
+    .retro-prints-h2,
+    .photo-strips-h2 {
+        font-family: "Playfair Display", Sans-serif;
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: #000000;
+    }
+    
+    .custom-photobook-p,
+    .themed-photobook-p,
+    .photo-tiles-p,
+    .mug-p,
+    .retro-prints-p,
+    .photo-strips-p {
+        text-align: left;
+        color: #565656;
+        font-family: "Plus Jakarta Sans", Sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 2.08rem;
+    }
+    
+    .photo-tiles-button,
+    .themed-photobook-button,
+    .custom-photobook-button,
+    .mug-button,
+    .retro-prints-button,
+    .photo-strips-button,
+    .retro-bundleup-button,
+    .retro-qualityprints-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .photo-tiles-button a button,
+    .themed-photobook-button a button,
+    .custom-photobook-button a button,
+    .mug-button a button,
+    .retro-prints-button a button,
+    .photo-strips-button a button,
+    .retro-bundleup-button a button,
+    .retro-qualityprints-button a button {
+        background-color: transparent;
+        font-family: 'graphik';
+        font-size: 0.9rem;
+        font-weight: 600;
+        fill: #FFFFFF;
+        color: #FFFFFF;
+        background-image: linear-gradient(180deg, #FD6984 0%, #F79E81 100%);
+        border-style: none;
+        border-radius: 99px 99px 99px 99px;
+        padding: 23px 45px 23px 45px;
+    }
+    
+    .photo-tiles-button button a,
+    .themed-photobook-button button a,
+    .custom-photobook-button button a,
+    .mug-button button a,
+    .retro-prints-button button a,
+    .photo-strips-button button a,
+    .retro-bundleup-button button a,
+    .retro-qualityprints-button button a {
+        color: #fff;
+        text-decoration: none;
+    }
+</style>
+<div class="featured-content-conatiner">
+
+    <div style="display: flex; " class="theme-photobook">
+
+        <div class="themed-photobook-content">
+            <h2 class="themed-photobook-h2">Themed Photobook</h2>
+            <p class="themed-photobook-p">Create lasting memories with Color Kahar Themed Photobooks, masterfully crafted by our team of designers. Just select a theme, drop in your favorite photos, and voila! You've got yourself a photobook with stunning artwork and integrated captions
+                in no time. The photobooks make perfect gifts for your loved ones or a keepsake for yourself.</p>
+        </div>
+        <div class="themed-photobook-button">
+            <a href="/themed-photobooks/"><button>Explore more</button></a>
+        </div>
+
+    </div>
+    <div style=" " class="custom-photobook">
+        <div class="custom-photobook-content">
+            <h2 class="custom-photobook-h2">Custom Photobook</h2>
+            <p class="custom-photobook-p">Color Kahar Custom Photobooks offer you a blank canvas to paint your memories on. Decide on the layout, select the background artwork, and add personalized captions to create a one-of-a-kind photobook. This is creativity at your fingertips.
+                With a range of available cover types and sizes, the sky is the limit of creativity. Our hardcover photobooks make perfect gifts or keepsakes.</p>
+        </div>
+        <div class="custom-photobook-button">
+            <a href="/custom-photobook/"><button>Explore more</button></a>
+        </div>
+    </div>
+    <div style=" " class="photo-tiles">
+        <div class="photo-tiles-content">
+            <h2 class="photo-tiles-h2">Photo Tiles</h2>
+            <p class="photo-tiles-p">With Color Kahar Photo Tiles, you can easily turn your favorite photos into wall art. These 8x8 inch photos are encased in lightweight frames that stick and restick without damaging your walls. Whether you're commemorating special occasions
+                or everyday moments, Color Tiles make it easy to create a personalized art display. </p>
+        </div>
+        <div class="photo-tiles-button">
+            <a href="/photo-prints/"><button>Explore more</button></a>
+        </div>
+    </div>
+    <div style=" " class="mug-product">
+        <div class="mug-content">
+            <h2 class="mug-h2">Mug Product</h2>
+            <p class="mug-p">Make your tea breaks more delightful with Color Kahar Photo Mugs. Available in white ceramic and magical heat-changing types, these mugs add a personal touch to your day. Choose from various elegant themes designed by our design experts, turning
+                your favorite beverage into a moment of cherished memories. Customize your mug to your liking at a touch of a button.</p>
+        </div>
+        <div class="mug-button">
+            <a href="/mugs/"><button>Explore more</button>
+            </a>
+        </div>
+    </div>
+    <div style=" " class="retro-prints">
+        <div class="retro-prints-content">
+            <h2 class="retro-prints-h2">Retro Prints</h2>
+            <p class="retro-prints-p">Color Kahar Retro Prints let you turn digital moments into personalized vintage-style photos at a touch of a button. Designed in the style of classic retro style, these prints allow you to add personalized text to each photo, giving a retro
+                feel to your modern memories. Retro Prints are perfect for gifts or keepsake for yourself.</p>
+        </div>
+        <div class="retro-prints-button">
+            <a href="/retro-photo-prints/"><button>Explore more</button></a>
+        </div>
+    </div>
+    <div style=" " class="photo-strips">
+        <div class="photo-strips-content">
+            <h2 class="photo-strips-h2">Photo Strips</h2>
+            <p class="photo-strips-p">Color Kahar Photo Strips are your ticket to a home-based photobooth experience. These photo strips, printed on thick photo paper, can be customized with captions. Make great bookmarks, gifts, or party favors directly from our app with a touch
+                of a button.</p>
+        </div>
+        <div class="photo-strips-button">
+            <a href="/gifts/photo-strips/"><button>Explore more</button></a>
+        </div>
+    </div>
+
+
+</div>
+<div class="ProductSliderMainWrapper">
     <div class="ProductSliderWrapper">
         <i id="left" class=""> <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-prev-arrow.png" alt="Previous" /></i>
         <div class="carousel">
 
-            <img class="active" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/magnet-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/photo-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-special-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-size-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-feature-bundleup-01.webp" alt="img" draggable="false">
-            <img src="https://dev.colorkahar.com/wp-content/uploads/2024/01/retro-feature-qualityprints-01.webp" alt="img" draggable="false">
+            <img class="active" title="theme-photobook" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/pb-product-01-1.webp" alt="img" draggable="false">
+            <img title="custom-photobook" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/cb-product-01.webp" alt="img" draggable="false">
+            <img title="photo-tiles" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/wallart-product-01.webp" alt="img" draggable="false">
+            <img title="mug-product" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/mug-product-01.webp" alt="img" draggable="false">
+            <img title="retro-prints" src="https://dev.colorkahar.com/wp-content/uploads/2024/10/retro-product-01.webp" alt="img" draggable="false">
+            <img title="photo-strips" src="https://dev.colorkahar.com/wp-content/uploads/2025/02/Untitled-2.jpg" alt="img" draggable="false">
         </div>
         <div class="pagination"></div>
         <i id="right" class="">  <img src="https://dev.colorkahar.com/wp-content/uploads/2025/01/product-cat-next-arrow.png" alt="Next" /></i>
@@ -219,6 +416,125 @@
 
     // Variables
     let currentIndex = 0;
+    // Function to handle image width change based on active class
+    const handleImageWidthChange = () => {
+
+
+        const firstImage = images[0];
+        const secondImage = images[1];
+        const thirdImage = images[2];
+        const forthImage = images[3];
+        const fifthImage = images[4];
+        const sixthImage = images[5];
+
+        // Check if the second image has the active class
+        if (firstImage.classList.contains("active")) {
+            firstImage.style.width = "600px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.width = "400px";
+            thirdImage.style.width = "400px";
+            forthImage.style.width = "400px";
+            fifthImage.style.width = "400px";
+            sixthImage.style.width = "400px";
+
+            firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.height = "400px";
+            thirdImage.style.height = "400px";
+            forthImage.style.height = "400px";
+            fifthImage.style.height = "400px";
+            sixthImage.style.height = "400px";
+
+
+        } else if (secondImage.classList.contains("active")) {
+            firstImage.style.width = "600px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.width = "600px";
+            thirdImage.style.width = "400px";
+            forthImage.style.width = "400px";
+            fifthImage.style.width = "400px";
+            sixthImage.style.width = "400px";
+
+            firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.height = "400px";
+            thirdImage.style.height = "400px";
+            forthImage.style.height = "400px";
+            fifthImage.style.height = "400px";
+            sixthImage.style.height = "400px";
+
+        } else if (thirdImage.classList.contains("active")) {
+            firstImage.style.width = "600px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.width = "600px";
+            thirdImage.style.width = "600px";
+            forthImage.style.width = "400px";
+            fifthImage.style.width = "400px";
+            sixthImage.style.width = "400px";
+
+            firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.height = "400px";
+            thirdImage.style.height = "400px";
+            forthImage.style.height = "400px";
+            fifthImage.style.height = "400px";
+            sixthImage.style.height = "400px";
+
+        } else if (forthImage.classList.contains("active")) {
+            firstImage.style.width = "600px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.width = "600px";
+            thirdImage.style.width = "600px";
+            forthImage.style.width = "600px";
+            fifthImage.style.width = "400px";
+            sixthImage.style.width = "400px";
+
+            firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.height = "400px";
+            thirdImage.style.height = "400px";
+            forthImage.style.height = "400px";
+            fifthImage.style.height = "400px";
+            sixthImage.style.height = "400px";
+
+        } else if (fifthImage.classList.contains("active")) {
+            firstImage.style.width = "600px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.width = "600px";
+            thirdImage.style.width = "400px";
+            forthImage.style.width = "400px";
+            fifthImage.style.width = "600px";
+            sixthImage.style.width = "400px";
+
+            sixthImage.style.height = "400px";
+            firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.height = "400px";
+            thirdImage.style.height = "400px";
+            forthImage.style.height = "400px";
+            fifthImage.style.height = "400px";
+            sixthImage.style.height = "400px";
+
+        } else if (sixthImage.classList.contains("active")) {
+            firstImage.style.width = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.width = "400px";
+            thirdImage.style.width = "400px";
+            forthImage.style.width = "400px";
+            fifthImage.style.width = "400px";
+            sixthImage.style.width = "600px";
+
+            firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+            secondImage.style.height = "400px";
+            thirdImage.style.height = "400px";
+            forthImage.style.height = "400px";
+            fifthImage.style.height = "400px";
+            sixthImage.style.height = "400px";
+
+        }
+        /*else if (eighthImage.classList.contains("active")) {
+
+                   eighthImage.style.width = "600px";
+                   firstImage.style.height = "400px"; // Keep first image as 600px x 400px when second image is active
+                   secondImage.style.height = "400px";
+                   thirdImage.style.height = "400px";
+                   forthImage.style.height = "400px";
+                   fifthImage.style.height = "400px";
+                   sixthImage.style.height = "400px";
+                   seventhImage.style.height = "400px";
+                   eighthImage.style.height = "400px";
+               }*/
+    };
+
 
     // Create pagination dots
     const createPaginationDots = () => {
@@ -237,6 +553,7 @@
         dots.forEach((dot, index) => {
             dot.classList.toggle("active", index === currentIndex);
         });
+        handleImageWidthChange();
     };
 
     // Navigate to a specific image
@@ -265,10 +582,11 @@
     const scrollCarousel = (direction) => {
         const maxIndex = images.length - 1;
 
-        if (direction === "right" && currentIndex < maxIndex) {
-            currentIndex++;
-        } else if (direction === "left" && currentIndex > 0) {
-            currentIndex--;
+        if (direction === "right") {
+            currentIndex = (currentIndex + 1) % images.length; // Move to next image, loop back to 0 after the last image
+        } else if (direction === "left") {
+            currentIndex = (currentIndex - 1 + images.length) % images.length; // Move to previous image, loop to the last image from the first one
+
         }
 
         navigateToImage(currentIndex);
@@ -279,43 +597,62 @@
         icon.addEventListener("click", () => {
             const direction = icon.id === "right" ? "right" : "left";
             scrollCarousel(direction);
+            console.log('click');
+            handleImageWidthChange();
         });
     });
 
     // Initial setup
     createPaginationDots();
     updatePaginationDots();
-    
-    
-    
-    
-    /*for classes activate*/
-    document.addEventListener("DOMContentLoaded", function() {
-        const carouselImages = document.querySelectorAll(".carousel img");
+    handleImageWidthChange();
+    /* New Code for Check Active Image */
+    const featuredDivs = document.querySelectorAll('.featured-content-conatiner > div');
 
-        if (carouselImages.length > 1) {
-            const firstChild = carouselImages[0];
-            const secondChild = carouselImages[1];
+    // Function to check the active image and show/hide divs
+    const checkActiveImage = () => {
+        const activeImage = carousel.querySelector('img.active');
+        const activeImageTitle = activeImage.getAttribute('title'); // Get the title of the active image
 
-            // Monitor class changes on the second child
-            const observer = new MutationObserver(() => {
-                if (secondChild.classList.contains("active")) {
-                    // If the second child has "active", ensure the first child keeps "active"
-                    firstChild.classList.add("active");
-                } else if (thirdChild.classList.contains("active")) {
-                    // If the second child has "active", ensure the first child keeps "active"
-                    secondChild.classList.add("active");
-                } else {
-                    // Otherwise, remove "active" from the first child
-                    firstChild.classList.remove("active");
-                }
-            });
+        // Get the current screen width
+        const screenWidth = window.innerWidth;
 
-            // Observe class changes on the second child
-            observer.observe(secondChild, {
-                attributes: true,
-                attributeFilter: ["class"]
-            });
-        }
+        // Loop through all divs in 'featured-content-container'
+        featuredDivs.forEach((div) => {
+            const divClass = div.classList[0]; // Get the first class of the div
+            if (divClass === activeImageTitle) {
+                // Check screen width and set display property accordingly
+                div.style.display = (screenWidth >= 320 && screenWidth <= 767) ? 'block' : 'flex';
+            } else {
+                div.style.display = 'none'; // Hide all others
+            }
+        });
+    };
+
+    // Call the function initially to check the first active image and show the correct div
+    checkActiveImage();
+
+    // Add event listener to handle screen resizing
+    window.addEventListener('resize', checkActiveImage);
+
+
+    // Add a listener to the arrows to check and update the div visibility when the carousel is changed
+    // Arrow click listeners
+    arrowIcons.forEach((icon) => {
+        icon.addEventListener('click', () => {
+            navigateToImage(currentIndex); // Navigate to clicked image
+            checkActiveImage();
+
+        });
+    });
+
+
+    // Add an event listener for pagination dot clicks to also check active image
+    const dots = document.querySelectorAll(".pagination .dot");
+    dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+            navigateToImage(currentIndex); // Navigate to clicked image
+            checkActiveImage(); // Call the function to update the div visibility
+        });
     });
 </script>
